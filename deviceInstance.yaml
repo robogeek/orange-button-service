@@ -1,0 +1,11 @@
+
+# Appears to come from ASHRAE 201 FSGIM section 5
+# Is an instance of the DeviceAbstract object definition
+
+allOf:
+    - $ref: "deviceAbstract.yaml"
+    - type: object
+      properties:
+        numberUnits:
+            type: integer
+            description: The number of installed devices of this type

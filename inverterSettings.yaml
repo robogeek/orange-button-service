@@ -1,0 +1,15 @@
+
+# TODO All these fields are TBD on defining the type.
+
+type: object
+properties:
+    VoltVar:
+    FrequencyWatt:
+    VoltWatt:
+    LHVRT:
+    LHFRT:
+    normalRampRate:
+    SoftStartRampRate:
+    ConnectDisconnect:
+    DERCurveList:
+    DERCurve:

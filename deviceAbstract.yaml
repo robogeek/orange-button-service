@@ -1,0 +1,65 @@
+
+# Appears to come from ASHRAE 201 FSGIM section 5
+
+type: object
+properties:
+    deviceType:
+        type: string
+        enum:
+            - inverter
+            - batteryInverter
+            - module
+            - metStation
+            - combiner
+            - meter
+            - logger
+    manufacturer:
+        type: string
+        description: Manufacturer name
+    modelNumber:
+        type: string
+        description: Manufacturer-assigned model number
+    serialNumber:
+        type: string
+        description: Manufacturer-assigned serial number
+    location:
+        type: string
+        description: Where is this device installed
+    warrantyTerm:
+        type: string
+        description: The length of the warranty
+    warrantyCoverage:
+        type: string
+        description: Coverage terms for the warranty
+    datePurchased:
+        type: string
+        description: When the device was purchased
+    lastServiceDate:
+        type: string
+        description: When the device was last serviced
+    cost:
+        type: string
+        description: How much did the device cost
+    MACaddress:
+        type: string
+        description: The ethernet-level address for the device
+    certifications:
+        # It seems what's meant is for there to be an array of Certification's
+        # Each Certification is ... what?  Is it simply the string identifying
+        # the certification authority?  Or is there a Certification ID as well?
+        # As shown here it is simply an array of the certification authorities
+        # that apply to this device.
+        type: array
+        description: List of certifications for the device
+        items:
+            type: string
+            enum:
+                - UL
+                - CEC
+                - TUV
+                - JET
+                - MCS
+                - FSEC
+                - SunSpec
+                - IEEE
+                - HECO

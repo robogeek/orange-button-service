@@ -1,0 +1,41 @@
+
+# Defined in ASHRAE 201 FSGIM section 6.3
+# This derives from Measurement.  It is supposed to be a MeasurementSet, meaning
+# an array of Measurement's
+
+type: array
+properties:
+    allOf:
+        - $ref: "Measurement.yaml"
+        - type: object
+          properties:
+            source:
+                type: string
+                description: "QUERY: What the heck is this?"
+            quality:
+                type: number
+                description: "QUERY: What the heck is this?"
+            exportedEnergyAC:
+                type: number
+                description:  "QUERY: What the heck is this?"
+            exportedGridAC:
+                type: number
+                description:  "QUERY: What the heck is this?"
+            importedGridAC:
+                type: number
+                description:  "QUERY: What the heck is this?"
+            chargedStorageAC:
+                type: number
+                description:  "QUERY: What the heck is this?"
+            chargedStorageACgrid:
+                type: number
+                description:  "QUERY: What the heck is this?"
+            chargedStorageACpv:
+                type: number
+                description:  "QUERY: What the heck is this?"
+            dischargedStorageAC:
+                type: number
+                description:  "QUERY: What the heck is this?"
+            parasiticLossesAC:
+                type: number
+                description:  "QUERY: What the heck is this?"

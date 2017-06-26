@@ -1,0 +1,47 @@
+# TODO Determine what document defines this
+# TODO flesh out the description for each field
+# TODO DERType should be an emum?
+
+type: object
+properties:
+    DERType:
+        type: string
+        description: The kind of DER
+    nominalRealPowerRating:
+        type: number
+    nominalApparentPowerRating:
+        type: number
+    NominalPowerTemp:
+        type: number
+    NominalPowerRating:
+        type: number
+    maximumDCvoltage:
+        type: number
+    maximumDCamps:
+        type: number
+    inverterShortCircuit:
+        type: number
+    InverterTerminalTemp:
+        type: number
+    rtgA:
+        type: number
+    rtgAh:
+        type: number
+    rtgMaxChargeRate:
+        type: number
+    rtgMaxDischargeRate:
+        type: number
+    rtgMinPF:
+        type: number
+    rtgMinPFNeg:
+        type: number
+    rtgVA:
+        type: number
+    rtgVArNeg:
+        type: number
+    rtgW:
+        type: number
+    rtgWh:
+        type: number
+    capability:
+        $ref: "inverterCapability.yaml"

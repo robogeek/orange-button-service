@@ -1,0 +1,116 @@
+swagger: '2.0'
+info:
+    description: |
+        Orange Button data service for on-site energy management device
+    version: "0.1.0"
+    title: "Orange Button on-site energy management service"
+    contact:
+        email: "david@davidherron.com"
+schemes:
+    - "http"
+basePath: /v0.1
+
+paths:
+
+    /powerMeasurements:
+        get:
+            description: Return powerMeasurements for a pvSystem.  Probably needs to support query over a date range.
+            parameters:
+                - in: query
+                  name: timestamp
+                  type: string
+                  description: |
+                    Is this parameter needed?  The idea is controlling the timeframe of the data to be returned.  This may need to be a date-range (start - end).  We'll mark this as an optional parameter for now
+                  required: false
+            responses:
+                200:
+                    description: OK
+                    schema:
+                        $ref: "pvSystemPowerMeasurements.yaml"
+
+    /powerLifetimeMeasurements:
+        get:
+            description: Return powerLifetimeMeasurements for a pvSystem.  Probably needs to support query over a date range.
+            parameters:
+                - in: query
+                  name: timestamp
+                  type: string
+                  description: |
+                    Is this parameter needed?  The idea is controlling the timeframe of the data to be returned.  This may need to be a date-range (start - end).  We'll mark this as an optional parameter for now
+                  required: false
+            responses:
+                200:
+                    description: OK
+                    schema:
+                        # Note this references the same object when there should probably be another object
+                        $ref: "pvSystemPowerMeasurements.yaml"
+
+    /energyMeasurements:
+        get:
+            description: Return energyMeasurements for a pvSystem.  Probably needs to support query over a date range.
+            parameters:
+                - in: query
+                  name: timestamp
+                  type: string
+                  description: |
+                    Is this parameter needed?  The idea is controlling the timeframe of the data to be returned.  This may need to be a date-range (start - end).  We'll mark this as an optional parameter for now
+                  required: false
+            responses:
+                200:
+                    description: OK
+                    schema:
+                        $ref: "pvSystemEnergyMeasurements.yaml"
+
+    /energyLifetimeMeasurements:
+        get:
+            description: Return energyLifetimeMeasurements for a pvSystem.  Probably needs to support query over a date range.
+            parameters:
+                - in: query
+                  name: timestamp
+                  type: string
+                  description: |
+                    Is this parameter needed?  The idea is controlling the timeframe of the data to be returned.  This may need to be a date-range (start - end).  We'll mark this as an optional parameter for now
+                  required: false
+            responses:
+                200:
+                    description: OK
+                    schema:
+                        $ref: "pvSystemEnergyLifetimeMeasurements.yaml"
+
+    /devices:
+        get:
+            description: Return a list of the devices in the system.
+            responses:
+                200:
+                    description: OK
+                    schema:
+                        type: array
+                        items:
+                            $ref: "deviceInstance.yaml"
+
+    /inverters:
+        get:
+            description: Return a list of the inverters in the system.
+            responses:
+                200:
+                    description: OK
+                    schema:
+                        type: array
+                        items:
+                            $ref: "inverterInstance.yaml"
+
+    /inverterMeasurements:
+        get:
+            description: Return inverterMeasurements for a pvSystem.  Probably needs to support query over a date range.
+            parameters:
+                - in: query
+                  name: timestamp
+                  type: string
+                  description: |
+                    Is this parameter needed?  The idea is controlling the timeframe of the data to be returned.  This may need to be a date-range (start - end).  We'll mark this as an optional parameter for now
+                  required: false
+            responses:
+                200:
+                    description: OK
+                    schema:
+                        $ref: "inverterMeasurements.yaml"

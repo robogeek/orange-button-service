@@ -1,0 +1,9 @@
+
+# Defined in ASHRAE 201 FSGIM section 6.3
+# This is a base type for other Measurement objects
+
+type: object
+properties:
+    timeReference:
+        type: string
+        description:  The time interval for this measurement.  Either one or two timestamps

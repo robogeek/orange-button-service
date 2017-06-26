@@ -1,0 +1,30 @@
+
+
+type: array
+properties:
+    allOf:
+        - $ref: "Measurement.yaml"
+        - type: object
+          properties:
+              amps: # (block)
+                type: number
+              voltage: # (block)
+                type: number
+              watts:
+                type: number
+              hz:
+                type: number
+              VA:
+                type: number
+              VAr:
+                type: number
+              wattHours:
+                type: number
+              DCamps:
+                type: number
+              DCvoltage:
+                type: number
+              temperature: # (block)
+                type: number
+              status:
+              event: # (array)
