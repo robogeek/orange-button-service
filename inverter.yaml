@@ -2,46 +2,130 @@
 # TODO flesh out the description for each field
 # TODO DERType should be an emum?
 
-type: object
-properties:
-    DERType:
+Inverter:
+    type: object
+    properties:
+        # InverterAbstract
+        DERType:
+            type: string
+            description: The kind of DER
+        DeviceType:
+            $ref: "device.yaml#/DERDeviceType"
+        InverterManufacturer:
+            type: string
+            description: Manufacturer name
+        InverterModelNumber:
+            type: string
+            description: Manufacturer-assigned model number
+        InverterCertification:
+            $ref: "device.yaml#/DERCertificationType"
+        # InverterNameplate
+        # DERType:
+        #    type: string
+        #    description: The kind of DER
+        nominalRealPowerRating:
+            type: number
+        nominalApparentPowerRating:
+            type: number
+        NominalPowerTemp:
+            type: number
+        NominalPowerRating:
+            type: number
+        maximumDCvoltage:
+            type: number
+        maximumDCamps:
+            type: number
+        inverterShortCircuit:
+            type: number
+        InverterTerminalTemp:
+            type: number
+        rtgA:
+            type: number
+        rtgAh:
+            type: number
+        rtgMaxChargeRate:
+            type: number
+        rtgMaxDischargeRate:
+            type: number
+        rtgMinPF:
+            type: number
+        rtgMinPFNeg:
+            type: number
+        rtgVA:
+            type: number
+        rtgVArNeg:
+            type: number
+        rtgW:
+            type: number
+        rtgWh:
+            type: number
+        capability:
+            $ref: "#/InverterCapability"
+        # InverterInstance
+        NumberInverters:
+            type: number
+        FirmwareVersion:
+            type: string
+            description: Version of the firmware ...
+        LastFirmwareUpdate:
+            type: string
+            description: When the last update was performed
+        InverterSerialNumber:
+            type: string
+            description: Manufacturer-assigned serial number
+        inverterSettings:
+            $ref: "#/InverterSettings"
+        InverterMeasurements:
+
+
+
+InverterCapability:
+    type: array
+    items:
         type: string
-        description: The kind of DER
-    nominalRealPowerRating:
-        type: number
-    nominalApparentPowerRating:
-        type: number
-    NominalPowerTemp:
-        type: number
-    NominalPowerRating:
-        type: number
-    maximumDCvoltage:
-        type: number
-    maximumDCamps:
-        type: number
-    inverterShortCircuit:
-        type: number
-    InverterTerminalTemp:
-        type: number
-    rtgA:
-        type: number
-    rtgAh:
-        type: number
-    rtgMaxChargeRate:
-        type: number
-    rtgMaxDischargeRate:
-        type: number
-    rtgMinPF:
-        type: number
-    rtgMinPFNeg:
-        type: number
-    rtgVA:
-        type: number
-    rtgVArNeg:
-        type: number
-    rtgW:
-        type: number
-    rtgWh:
-        type: number
-    capability:
-        $ref: "inverterCapability.yaml"
+        enum:
+            - 1741SA
+            - Rule21
+            - HECO
+            - Sunspec
+
+InverterType:
+    type: string
+    enum:
+        - micro
+        - string
+        - central
+        - storage
+
+InverterSettings:
+    type: object
+    properties:
+        VoltVar:
+        FrequencyWatt:
+        VoltWatt:
+        LHVRT:
+        LHFRT:
+        normalRampRate:
+        SoftStartRampRate:
+        ConnectDisconnect:
+        DERCurveList:
+        DERCurve:
+
+inverterMeasurements:
+    type: object
+    properties:
+        TimeStamp:
+            type: string
+        Source:
+        Quality:
+        Amps: # (block)
+        Voltage: # (block)
+        Watts:
+        Hz:
+        VA:
+        VAr:
+        WattHours:
+        DCamps:
+        Temperature: # (block)
+        Status:
+        Event: # (array)

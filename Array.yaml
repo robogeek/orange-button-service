@@ -1,0 +1,48 @@
+
+Array:
+    type: object
+    properties:
+        +module
+        +inverter
+        installType:
+            type: string
+            enum:
+                - rooftop
+                - ground
+        totalModuleArea:
+            type: number
+        numberSubArrays: # (default1)
+            type: number
+        subArray: # (list)
+            type: array
+            properties:
+                allOf:
+                    - $ref: "#/SubArray"
+        +measurement
+
+SubArray:
+    type: object
+    properties:
+        trackerType:
+            type: string
+            enum:
+                - fixed
+                - 1Axis
+                - 2Axis
+                - azimuthAxis
+                - seasonalTilt
+        orientation:
+            type: string
+            enum:
+                - tilt_eq_latitude # (Boolean)
+                - tilt # (deg)
+                - azimuth # (deg)
+                - groundCoverageRatio
+                - trackerRotationLimit # (deg)
+        dcRating:
+            type: number
+        modulesPerString:
+            type: integer
+        numberStrings:
+            type: number
+        +geospatialLayout

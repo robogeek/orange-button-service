@@ -1,0 +1,228 @@
+
+Device:
+    description: |
+        Any electrical system device in a PV Array, such as inverters or PV modules.  This is a subset of the Equipment used to build the facilities on the Site.  Other Equipment like racking will not be considered for this object.
+    type: object
+    properties:
+        deviceType:
+            $ref: "#/DERDeviceType"
+        extendedInfo:
+        type:
+        subType:
+        manufacturer:
+            type: string
+            description: Manufacturer name
+        model:
+            type: string
+            description: Manufacturer-assigned model number
+        nameplate:
+            type: object
+            properties:
+                nominalActivePowerRating:
+                    type: number
+                nominalApparentPowerRating:
+                    type: number
+                nominalPowerTemp:
+                    type: number
+                nominalPowerRating:
+                    type: number
+                maximumDCvoltage:
+                    type: number
+                maximumDCamps:
+                    type: number
+                inverterShortCircuit:
+                    type: number
+                inverterTerminalTemp:
+                    type: number
+                minimumMPPTvoltage:
+                    type: number
+                maximumMPPRvoltage:
+                    type: number
+                batteryMaximumPower:
+                    type: number
+        status:
+            type: string
+            enum:
+                - off
+                - sleeping # (auto-shutdown) or low output power/voltage
+                - starting # up or ON but not producing power
+                - tracking # MPPT power point
+                - forced # power reduction/derating
+                - shutting-down
+                - faults # one or more faults exist
+                - standby # (service on unit) - DER may be at high output voltage/power
+                - test-mode
+                - manufacturer-defined-status
+        state:
+            type: object
+            properties:
+                voltVar:
+                frequencyWatt:
+                voltWatt:
+                lHVRT:
+                lHFRT:
+                normalRampRate:
+                softStartRampRate:
+                connectDisconnect:
+                powerCurve:
+                +curveList:
+        errorTypes:
+        measurements:
+        manufactureDate:
+            type: string
+            description: When the device was manufactured - ISO date string
+        purchaseDate:
+            type: string
+            description: When the device was purchased - ISO date string
+        serialNumber:
+            type: string
+            description: Manufacturer-assigned serial number
+        warrantyPromise:
+            type: string
+            description: Coverage terms for the warranty TBD exact format
+
+        # location:
+        #    type: string
+        #    description: Where is this device installed TBD exact format, lat/long?
+        # FROM DeviceNameplate
+        # deviceRatingPerformance:
+        #    type: string
+        #    description: TBD do not know what this is
+        # certifications:
+        #    type: array
+        #    description: List of certifications for the device
+        #    items:
+        #        $ref: "#/DERCertificationType"
+        # warrantyTerm:
+        #    type: string
+        #    description: The length of the warranty TBD exact format, number of months?
+        # warrantyCoverage:
+        #    type: string
+        #    description: Coverage terms for the warranty TBD exact format
+        # FROM DeviceInstance
+        # numberUnits:
+        #    type: integer
+        #    description: The count of the devices installed at the site
+        # warrantyProvider:
+        #    type: string
+        #    description: Name for the organization providing warranty support
+        # lastServiceDate:
+        #    type: string
+        #    description: When the device was last serviced - ISO date string - required for financials?
+        # cost:
+        #    type: string
+        #    description: How much did the device cost
+
+DERDeviceType:
+    type: string
+    enum:
+        - inverter   # a.k.a. PCS
+        - module
+        - metStation
+        - combiner
+        - meter
+        - logger
+        - transformer
+
+DERCertificationType:
+    type: string
+    enum:
+        - UL
+        - CEC
+        - TUV
+        - JET
+        - MCS
+        - FSEC
+        - SunSpec
+        - IEEE 2030.5
+        - OpenADR
+        - HECO
+
+Inverter:
+    allOf:
+        - $ref: "#/Device"
+        - type: object
+          properties:
+              deviceType:
+                  type: string
+                  enum: [ inverter ]
+              MeasurementTypes:
+              ErrorTypes:
+              FunctionsImplemented:
+                  $ref: "#/FunctionsImplemented"
+
+
+FunctionsImplemented:
+    type: object
+    properties:
+        voltVArMode:
+        frequencyWattMode:
+        wattPowerFactorMode:
+        voltWattMode:
+        lowVoltageRideThroughMode:
+        highVoltageRideThroughMode:
+        setGenConnect:
+        setStorConnect:
+        fixedW:
+        fixedVAr:
+        fixedPowerFactor:
+        chargeMode:
+        dischargeMode:
+
+Module:
+    allOf:
+        - $ref: "#/Device"
+        - type: object
+          properties:
+            modulesPerString:
+            stringsInParallel:
+            dcOptimizer: # (Boolean)
+            microinverter: # (Boolean)
+            MeasurementTypes:
+            ErrorTypes: # (specific)
+            Nameplate:
+                type: object
+                properties:
+                    stringVoc:
+                    stringVmp:
+
+Combiner:
+    allOf:
+        - $ref: "#/Device"
+        - type: object
+          properties:
+              MeasurementTypes:
+              ErrorTypes:
+
+Meter:
+    allOf:
+        - $ref: "#/Device"
+        - type: object
+          properties:
+              accuracy:
+              MeasurementTypes:
+              ErrorTypes:
+
+Logger:
+    allOf:
+        - $ref: "#/Device"
+        - type: object
+          properties:
+              MeasurementTypes:
+              ErrorTypes:
+
+Transformer:
+    allOf:
+        - $ref: "#/Device"
+        - type: object
+          properties:
+              MeasurementTypes:
+              ErrorTypes:
+
+MetStation:
+    allOf:
+        - $ref: "#/Device"
+        - type: object
+          properties:
+              MeasurementTypes:
+              ErrorTypes:

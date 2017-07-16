@@ -1,0 +1,104 @@
+
+SiteGroup:
+    type: object
+    properties:
+        GroupName:
+            type: string
+            description: A human-presentable name for the sites in SiteList
+        SiteList:
+            type: array
+            properties:
+                $ref: "#/Site"
+
+Site:
+    type: object
+    properties:
+        SiteID:
+            type: string
+            description: GUID for the Site
+        SiteDescription:
+            type: string
+            description: Description of the Site
+        parcelID:
+            type: string
+            description: Presumably a GUID for the parcel
+        # SiteType:
+        #    $ref: "#/SiteType"
+        address:
+            $ref: "Global.yaml#/PostalAddress"
+        location:
+            $ref: "#/location"
+        siteAverageElevation:
+            type: number
+        geospatialBoundary:
+        utilityMeterID:
+            type: string
+            description: Presumably a GUID for the meter
+        timezone:
+            type: string
+            description: TZ indicator
+        climateZone:
+            type: string
+        property:
+            $ref: "#/property"
+        owner:
+            type: string
+            description: Name of the entity owning the site
+
+# TODO This is not referenced by anything else
+SiteGeospatialData:
+    type: object
+    properties:
+        SiteLatitude:
+            type: number
+        SiteLongitude:
+            type: number
+        SiteElevation:
+            type: number
+        SiteAverageElevation:
+            type: number
+        SiteGeospatialBoundary: # Unknown definition
+
+# SiteType:
+#    type: string
+#    enum:
+#        - residential
+#        - commercial
+#        - industrial
+#        - agricultural
+#        - plant
+
+location:
+    type: object
+    properties:
+        latitude:
+            type: number
+        longitude:
+            type: number
+        elevation:
+            type: number
+
+property:
+    type: object
+    properties:
+        zoning:
+            type: string
+            description: Description of zoning codes by county planning or equivalent
+        mapURL:
+            type: string
+            description: URL to a maps service showing where the property exists
+        survey:
+            type: string
+            description: URL (URI?) to a site survey
+        maps:
+            type: string
+            description: URL (URI?) to official maps e.g. county planning commission
+        geotechnical:
+            type: string
+            description: URL (URI?) to geotechnical data
+        appraisal:
+            type: string
+            description: URL (URI?) to appraisal documents
+        photos:
+            type: string
+            description: URL (URI?) to a photo gallery

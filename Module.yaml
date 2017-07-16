@@ -1,0 +1,130 @@
+
+Module:
+    type: object
+    properties:
+        # ModuleAbstract
+        ModuleType:
+            $ref: "#/ModuleType"
+        ModuleManufacturer:
+            type: string
+        ModuleModelNumber:
+            type: string
+        ModuleCertification:
+            type: string
+            # WHERE IS THIS DEFINED?
+        # ModuleNameplate
+        NominalEfficiency:
+            type: number
+        MaxDCpower: # (STC)
+            type: number
+        MaxPowerCurrent:
+            type: number
+        OpenCircuitVoltage:
+            type: number
+        ShortCircuitCurrent:
+            type: number
+        BetaVoc:
+            type: number
+        AlphaIsc:
+            type: number
+        GammaPmp:
+            type: number
+        MaxFuseSeries:
+            type: number
+        TempCoefficientWdc:
+            type: number
+        TempCoefficientVOC:
+            type: number
+        TempCoefficientAdc:
+            type: number
+        # ModuleInstance
+        ModuleSerialNumber:
+            type: string
+        ModuleLocation:
+            type: string
+        ModuleDeviceAddress:
+            type: string
+        # NOT NEEDED ModuleMeasurements:
+        # NOT NEEDED    type: string
+
+
+
+ModuleType:
+    type: string
+    enum:
+        - thinfilm
+        - CSI
+        - CPV
+
+MountingType:
+    type: string
+    enum:
+        - GroundOrRackmount
+        - BuildingIntegrated
+
+ModuleState:
+    type: string
+    enum:
+        - Off
+        - Sleeping
+        - Starting
+        - Mppt
+        - Throttled
+        - Shutting_down
+        - Fault
+        - Standby
+        - Test
+        - Other
+
+ModuleMeasurements:
+    type: object
+    properties:
+        TimeStamp:
+            type: string
+        Source:
+            type: string
+        Quality:
+            type: number
+        OutputCurrent:
+            type: number
+        OutputVoltage:
+            type: number
+        OutputEnergy:
+            type: number
+        OutputPower:
+            type: number
+        Temperature:
+            type: number
+        DcDcInputCurrent:
+            type: number
+        DcDcInputVoltage:
+            type: number
+        DcDcInputEnergy:
+            type: number
+        DcDcInputPower:
+            type: number
+        Status:
+            $ref: "#/ModuleState"
+        Event: #  (array)
+            type: number
+        Error:
+            $ref: "#/ModuleErrorType"
+
+ModuleErrorType:
+    type: string
+    enum:
+        - Ground Fault
+        - Over Voltage
+        - Reserved
+        - Disconnect
+        - Manual shutdown
+        - Over Temperature
+        - Blown Fuse
+        - Under Temperature
+        - Memory Loss
+        - Arc Detection
+        - Theft Detection
+        - Over Current
+        - Output Over Voltage
+        - Output Under Voltage
+        - Test Failed

@@ -1,0 +1,67 @@
+
+System:
+    type: object
+    properties:
+        systemID:
+            type: string
+        Type:
+            type: string
+            enum:
+                - residential
+                - communitySolar
+                - commercial
+                - industrial
+                - agricultural
+                - utility
+        DERType:
+            type: string
+            enum:
+                - pvSystem
+                - storage
+                - pvStorage
+        Nameplate:
+            $ref: "#/SystemNameplate"
+        activationDate:
+            type: string
+        Availability:
+            type: string
+            enum:
+                - islanded
+                - standby
+                - environment
+                - grid
+                - shutdown
+                - forced
+                - emergency
+        Array:
+            type: array
+            properties:
+                allOf:
+                    - $ref: "Array.yaml#/Array"
+        +Meter TODO
+        +Logger TODO
+        +MetStation TODO
+        +Transformer TODO
+        Drawings: # (URI)
+            type: object
+            properties:
+                designDrawings:
+                    type: string
+                asBuiltDrawings:
+                    type: string
+
+SystemNameplate:
+    type: object
+    properties:
+        InstalledDCCapacity:
+            type: number
+        InstalledACCapacity:
+            type: number
+        InstalledPanelArea:
+            type: number
+        NominalPowerRating:
+            type: number
+        InstalledEnergyStoragekW:
+            type: number
+        InstalledEnergyStoragekWh:
+            type: number
