@@ -1,0 +1,148 @@
+
+
+Measurement:
+    description: |
+        Defined in ASHRAE 201 FSGIM section 6.3.  This is a base type for other Measurement objects.
+    type: object
+    properties:
+        timeReference:
+            type: string
+            description:  |
+                The time interval for this measurement.  Either one or two timestamps.  TBD a textual format to store two timestamps.  See ASHRAE 201 FSGIM sections 5.5 and 6.3
+
+powerMeasurements:
+    description: |
+        Defined in ASHRAE 201 FSGIM section 6.3. This derives from Measurement.  It is supposed to be a MeasurementSet, meaning an array of Measurement's.
+    type: array
+    properties:
+        allOf:
+            - $ref: "#/Measurement"
+            - type: object
+              properties:
+                source:
+                    type: string
+                    description: "QUERY: What the heck is this?"
+                quality:
+                    type: number
+                    description: "QUERY: What the heck is this?"
+                KWpeak:
+                    type: number
+                    description: "Peak production in kiloWatts  QUERY: Over what time period?"
+                powerReal:
+                    type: number
+                    description: "Real power in kiloWatts.  FSGIM section 6.3"
+                powerReactive:
+                    type: number
+                    description: "Reactive power in kiloWatts.  FSGIM section 6.3"
+                powerApparent:
+                    type: number
+                    description: "Apparent power in kiloWatts.  FSGIM section 6.3"
+                powerFactor:
+                    type: number
+                    description: "Power Factor in .... units?  Percentage?"
+
+energyMeasurements:
+    description: |
+        Defined in ASHRAE 201 FSGIM section 6.3. This derives from Measurement.  It is supposed to be a MeasurementSet, meaning an array of Measurement's.
+    type: array
+    properties:
+        allOf:
+            - $ref: "#/Measurement"
+            - type: object
+              properties:
+                source:
+                    type: string
+                    description: "QUERY: What the heck is this?"
+                quality:
+                    type: number
+                    description: "QUERY: What the heck is this?"
+                periodStart:
+                    type: string
+                    description: "QUERY: What the heck is this?"
+                periodEnd:
+                    type: string
+                    description: "QUERY: What the heck is this?  Obviously the two define a time range"
+                interval:
+                    type: string
+                    description: "QUERY: What the heck is this?  Another time range?  Or a repetition factor?"
+                energyReal:
+                    type: number
+                    description:  "QUERY: What the heck is this?"
+                energyReactive:
+                    type: number
+                    description:  "QUERY: What the heck is this?"
+                energyApparent:
+                    type: number
+                    description:  "QUERY: What the heck is this?"
+
+
+energyLifetimeMeasurements:
+    description: |
+        Defined in ASHRAE 201 FSGIM section 6.3. This derives from Measurement.  It is supposed to be a MeasurementSet, meaning an array of Measurement's.
+    type: array
+    properties:
+        allOf:
+            - $ref: "#/Measurement"
+            - type: object
+              properties:
+                source:
+                    type: string
+                    description: "QUERY: What the heck is this?"
+                quality:
+                    type: number
+                    description: "QUERY: What the heck is this?"
+                exportedEnergyAC:
+                    type: number
+                    description:  "QUERY: What the heck is this?"
+                exportedGridAC:
+                    type: number
+                    description:  "QUERY: What the heck is this?"
+                importedGridAC:
+                    type: number
+                    description:  "QUERY: What the heck is this?"
+                chargedStorageAC:
+                    type: number
+                    description:  "QUERY: What the heck is this?"
+                chargedStorageACgrid:
+                    type: number
+                    description:  "QUERY: What the heck is this?"
+                chargedStorageACpv:
+                    type: number
+                    description:  "QUERY: What the heck is this?"
+                dischargedStorageAC:
+                    type: number
+                    description:  "QUERY: What the heck is this?"
+                parasiticLossesAC:
+                    type: number
+                    description:  "QUERY: What the heck is this?"
+
+
+inverterMeasurements:
+    type: array
+    properties:
+        allOf:
+            - $ref: "#/Measurement"
+            - type: object
+              properties:
+                  amps: # (block)
+                    type: number
+                  voltage: # (block)
+                    type: number
+                  watts:
+                    type: number
+                  hz:
+                    type: number
+                  VA:
+                    type: number
+                  VAr:
+                    type: number
+                  wattHours:
+                    type: number
+                  DCamps:
+                    type: number
+                  DCvoltage:
+                    type: number
+                  temperature: # (block)
+                    type: number
+                  status:
+                  event: # (array)
