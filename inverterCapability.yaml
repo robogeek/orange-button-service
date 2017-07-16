@@ -1,8 +1,0 @@
-type: array
-items:
-    type: string
-    enum:
-        - 1741SA
-        - Rule21
-        - HECO
-        - Sunspec
