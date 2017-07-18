@@ -38,10 +38,14 @@ System:
             properties:
                 allOf:
                     - $ref: "Array.yaml#/Array"
-        +Meter TODO
-        +Logger TODO
-        +MetStation TODO
-        +Transformer TODO
+        Meter: # TODO
+            $ref: "Device.yaml#/Meter"
+        Logger: # TODO
+            $ref: "Device.yaml#/Logger"
+        MetStation: # TODO
+            $ref: "Device.yaml#/MetStation"
+        Transformer: # TODO
+            $ref: "Device.yaml#/Transformer"
         Drawings: # (URI)
             type: object
             properties:

@@ -11,106 +11,404 @@ schemes:
 basePath: /v0.1
 
 paths:
-
-    /powerMeasurements:
+    /systems:
         get:
-            description: Return powerMeasurements for a pvSystem.  Probably needs to support query over a date range.
-            parameters:
-                - in: query
-                  name: timestamp
-                  type: string
-                  description: |
-                    Is this parameter needed?  The idea is controlling the timeframe of the data to be returned.  This may need to be a date-range (start - end).  We'll mark this as an optional parameter for now
-                  required: false
-            responses:
-                200:
-                    description: OK
-                    schema:
-                        $ref: "pvSystemPowerMeasurements.yaml"
-
-    /powerLifetimeMeasurements:
-        get:
-            description: Return powerLifetimeMeasurements for a pvSystem.  Probably needs to support query over a date range.
-            parameters:
-                - in: query
-                  name: timestamp
-                  type: string
-                  description: |
-                    Is this parameter needed?  The idea is controlling the timeframe of the data to be returned.  This may need to be a date-range (start - end).  We'll mark this as an optional parameter for now
-                  required: false
-            responses:
-                200:
-                    description: OK
-                    schema:
-                        # Note this references the same object when there should probably be another object
-                        $ref: "pvSystemPowerMeasurements.yaml"
-
-    /energyMeasurements:
-        get:
-            description: Return energyMeasurements for a pvSystem.  Probably needs to support query over a date range.
-            parameters:
-                - in: query
-                  name: timestamp
-                  type: string
-                  description: |
-                    Is this parameter needed?  The idea is controlling the timeframe of the data to be returned.  This may need to be a date-range (start - end).  We'll mark this as an optional parameter for now
-                  required: false
-            responses:
-                200:
-                    description: OK
-                    schema:
-                        $ref: "pvSystemEnergyMeasurements.yaml"
-
-    /energyLifetimeMeasurements:
-        get:
-            description: Return energyLifetimeMeasurements for a pvSystem.  Probably needs to support query over a date range.
-            parameters:
-                - in: query
-                  name: timestamp
-                  type: string
-                  description: |
-                    Is this parameter needed?  The idea is controlling the timeframe of the data to be returned.  This may need to be a date-range (start - end).  We'll mark this as an optional parameter for now
-                  required: false
-            responses:
-                200:
-                    description: OK
-                    schema:
-                        $ref: "pvSystemEnergyLifetimeMeasurements.yaml"
-
-    /devices:
-        get:
-            description: Return a list of the devices in the system.
+            description: Retrieve all systems the user has access to
+            operationId: findSystems
+            # TODO parameters:  Parameters to filter the list of System's returned
             responses:
                 200:
                     description: OK
                     schema:
                         type: array
                         items:
-                            $ref: "deviceInstance.yaml"
-
-    /inverters:
+                            $ref: "System.yaml#/System"
+        post:
+            description: Create a new System
+            operationId: NewSystem
+            parameters:
+                - in: body
+                  description: The system to create
+                  required: true
+                  schema:
+                      $ref: "System.yaml#/System"
+            responses:
+                200:
+                    description: OK
+                    schema:
+                        $ref: "System.yaml#/System"
+    /system/{systemID}:
         get:
-            description: Return a list of the inverters in the system.
+            description: Read an existing System
+            parameters:
+                - in: path
+                  name: systemID
+                  type: string
+            responses:
+                200:
+                    description: OK
+                    schema:
+                        $ref: "System.yaml#/System"
+
+        post:
+            description: Update an existing System
+            operationId: UpdateSystem
+            parameters:
+                - in: path
+                  name: systemID
+                  type: string
+                - in: body
+                  description: The system to update
+                  required: true
+                  schema:
+                      $ref: "System.yaml#/System"
+            responses:
+                200:
+                    description: OK
+                    schema:
+                        $ref: "System.yaml#/System"
+        delete:
+            description: Delete an existing system
+            operationId: deleteSystem
+            parameters:
+                - in: path
+                  name: systemID
+                  type: string
+            responses:
+                200:
+                    description: OK
+
+    /system/{systemID}/arrays:
+        get:
+            description: Retrieve all arrays the user has access to in the named system
+            operationId: findArrays
+            parameters:
+                - in: path
+                  name: systemID
+                  type: string
+            # TODO parameters:  Parameters to filter the list of System's returned
             responses:
                 200:
                     description: OK
                     schema:
                         type: array
                         items:
-                            $ref: "inverterInstance.yaml"
-
-    /inverterMeasurements:
-        get:
-            description: Return inverterMeasurements for a pvSystem.  Probably needs to support query over a date range.
+                            $ref: "Array.yaml#/Array"
+        post:
+            description: Create a new Array
+            operationId: NewArray
             parameters:
-                - in: query
-                  name: timestamp
+                - in: path
+                  name: systemID
                   type: string
-                  description: |
-                    Is this parameter needed?  The idea is controlling the timeframe of the data to be returned.  This may need to be a date-range (start - end).  We'll mark this as an optional parameter for now
-                  required: false
+                - in: body
+                  description: The array to create
+                  required: true
+                  schema:
+                      $ref: "Array.yaml#/Array"
             responses:
                 200:
                     description: OK
                     schema:
-                        $ref: "inverterMeasurements.yaml"
+                        $ref: "Array.yaml#/Array"
+
+    /system/{systemID}/array/{arrayID}:
+        get:
+            description: Read an existing Array
+            parameters:
+                - in: path
+                  name: systemID
+                  type: string
+                - in: path
+                  name: arrayID
+                  type: string
+            responses:
+                200:
+                    description: OK
+                    schema:
+                        $ref: "Array.yaml#/Array"
+
+        post:
+            description: Update an existing Array
+            operationId: UpdateArray
+            parameters:
+                - in: path
+                  name: systemID
+                  type: string
+                - in: path
+                  name: arrayID
+                  type: string
+                - in: body
+                  description: The array to update
+                  required: true
+                  schema:
+                      $ref: "Array.yaml#/Array"
+            responses:
+                200:
+                    description: OK
+                    schema:
+                        $ref: "Array.yaml#/Array"
+        delete:
+            description: Delete an existing array
+            operationId: deleteArray
+            parameters:
+                - in: path
+                  name: systemID
+                  type: string
+                - in: path
+                  name: arrayID
+                  type: string
+            responses:
+                200:
+                    description: OK
+
+    /system/{systemID}/devices:
+        get:
+            description: Retrieve all devices the user has access to in the named system
+            operationId: findDevices
+            parameters:
+                - in: path
+                  name: systemID
+                  type: string
+            # TODO parameters:  Parameters to filter the list of System's returned
+            responses:
+                200:
+                    description: OK
+                    schema:
+                        type: array
+                        items:
+                            $ref: "Device.yaml#/Device"
+        post:
+            # TODO May require multiple of these to support different Device's
+            description: Create a new Device
+            operationId: NewDevice
+            parameters:
+                - in: path
+                  name: systemID
+                  type: string
+                - in: body
+                  description: The device to create
+                  required: true
+                  schema:
+                        $ref: "Device.yaml#/Device"
+            responses:
+                200:
+                    description: OK
+                    schema:
+                        $ref: "Device.yaml#/Device"
+
+    /system/{systemID}/device/{deviceID}:
+        get:
+            description: Read an existing Device
+            parameters:
+                - in: path
+                  name: systemID
+                  type: string
+                - in: path
+                  name: deviceID
+                  type: string
+            responses:
+                200:
+                    description: OK
+                    schema:
+                        $ref: "Device.yaml#/Device"
+
+        post:
+            description: Update an existing Device
+            operationId: UpdateDevice
+            parameters:
+                - in: path
+                  name: systemID
+                  required: true
+                  type: string
+                - in: path
+                  name: deviceID
+                  required: true
+                  type: string
+                - in: body
+                  description: The device to update
+                  required: true
+                  schema:
+                      $ref: "Device.yaml#/Device"
+            responses:
+                200:
+                    description: OK
+                    schema:
+                        $ref: "Device.yaml#/Device"
+
+        delete:
+            description: Delete an existing device
+            operationId: deleteDevice
+            parameters:
+                - in: path
+                  name: systemID
+                  required: true
+                  type: string
+                - in: path
+                  name: deviceID
+                  required: true
+                  type: string
+            responses:
+                200:
+                    description: OK
+
+    # /site/create:
+    #    post:
+    #        description: Create a new Site
+    #        operationId: NewSite
+    #        requestBody:
+    #            description: The site to create
+    #            required: true
+    #            content:
+    #                application/json:
+    #                    schema:
+    #                        $ref: "Site.yml#/Site"
+    #        responses:
+    #            200:
+    #                description: OK
+    #                content:
+    #                    application/json:
+    #                        schema:
+    #                            $ref: "Site.yml#/Site"
+    # /site/update:
+    #    post:
+    #        post:
+    #            description: Update an existing Site
+    #            operationId: NewSite
+    #            requestBody:
+    #                description: The site to create
+    #                required: true
+    #                content:
+    #                    application/json:
+    #                        schema:
+    #                            $ref: "Site.yml#/Site"
+    #            responses:
+    #                200:
+    #                    description: OK
+    #                    content:
+    #                        application/json:
+    #                            schema:
+    #                                $ref: "Site.yml#/Site"
+    # /site/destroy/{siteID}:
+    #    post:
+    #        parameters:
+    #            - in: path
+    #              name: siteID
+    #              type: string
+    #        responses:
+    #            200:
+    #                description: OK
+    # /site/fetch/{siteID}:
+    #    get:
+    #        parameters:
+    #            - in: path
+    #              name: siteID
+    #              type: string
+    #        responses:
+    #            200:
+    #                description: OK
+    #                schema:
+    #                    $ref: "Site.yml#/Site"
+    # TBD /site/search to fetch multiple Site objects at once
+
+#    /powerMeasurements:
+#        get:
+#            description: Return powerMeasurements for a pvSystem.  Probably needs to support query over a date range.
+#            parameters:
+#                - in: query
+#                  name: timestamp
+#                  type: string
+#                  description: |
+#                    Is this parameter needed?  The idea is controlling the timeframe of the data to be returned.  This may need to be a date-range (start - end).  We'll mark this as an optional parameter for now
+#                  required: false
+#            responses:
+#                200:
+#                    description: OK
+#                    schema:
+#                        $ref: "Measurements.yaml#/powerMeasurements"
+
+#    /powerLifetimeMeasurements:
+#        get:
+#            description: Return powerLifetimeMeasurements for a pvSystem.  Probably needs to support query over a date range.
+#            parameters:
+#                - in: query
+#                  name: timestamp
+#                  type: string
+#                  description: |
+#                    Is this parameter needed?  The idea is controlling the timeframe of the data to be returned.  This may need to be a date-range (start - end).  We'll mark this as an optional parameter for now
+#                  required: false
+#            responses:
+#                200:
+#                    description: OK
+#                    schema:
+#                        # Note this references the same object when there should probably be another object
+#                        $ref: "Measurements.yaml#/powerMeasurements"
+
+#    /energyMeasurements:
+#        get:
+#            description: Return energyMeasurements for a pvSystem.  Probably needs to support query over a date range.
+#            parameters:
+#                - in: query
+#                  name: timestamp
+#                  type: string
+#                  description: |
+#                    Is this parameter needed?  The idea is controlling the timeframe of the data to be returned.  This may need to be a date-range (start - end).  We'll mark this as an optional parameter for now
+#                  required: false
+#            responses:
+#                200:
+#                    description: OK
+#                    schema:
+#                        $ref: "Measurements.yaml#/energyMeasurements"
+
+#    /energyLifetimeMeasurements:
+#        get:
+#            description: Return energyLifetimeMeasurements for a pvSystem.  Probably needs to support query over a date range.
+#            parameters:
+#                - in: query
+#                  name: timestamp
+#                  type: string
+#                  description: |
+#                    Is this parameter needed?  The idea is controlling the timeframe of the data to be returned.  This may need to be a date-range (start - end).  We'll mark this as an optional parameter for now
+#                  required: false
+#            responses:
+#                200:
+#                    description: OK
+#                    schema:
+#                        $ref: "Measurements.yaml#/energyLifetimeMeasurements"
+
+#    /devices:
+#        get:
+#            description: Return a list of the devices in the system.
+#            responses:
+#                200:
+#                    description: OK
+#                    schema:
+#                        type: array
+#                        items:
+#                            $ref: "device.yaml#/Device"
+
+#    /inverters:
+#        get:
+#            description: Return a list of the inverters in the system.
+#            responses:
+#                200:
+#                    description: OK
+#                    schema:
+#                        type: array
+#                        items:
+#                            $ref: "inverterInstance.yaml"
+
+#    /inverterMeasurements:
+#        get:
+#            description: Return inverterMeasurements for a pvSystem.  Probably needs to support query over a date range.
+#            parameters:
+#                - in: query
+#                  name: timestamp
+#                  type: string
+#                  description: |
+#                    Is this parameter needed?  The idea is controlling the timeframe of the data to be returned.  This may need to be a date-range (start - end).  We'll mark this as an optional parameter for now
+#                  required: false
+#            responses:
+##                    description: OK
+#                    schema:
+#                        $ref: "Measurements.yaml#/inverterMeasurements"

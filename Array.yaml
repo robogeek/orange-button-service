@@ -2,8 +2,8 @@
 Array:
     type: object
     properties:
-        +module
-        +inverter
+        module:
+        inverter:
         installType:
             type: string
             enum:
@@ -18,7 +18,7 @@ Array:
             properties:
                 allOf:
                     - $ref: "#/SubArray"
-        +measurement
+        measurement:
 
 SubArray:
     type: object
@@ -45,4 +45,4 @@ SubArray:
             type: integer
         numberStrings:
             type: number
-        +geospatialLayout
+        geospatialLayout:
