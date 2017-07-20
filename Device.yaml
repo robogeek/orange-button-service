@@ -57,15 +57,25 @@ Device:
             type: object
             properties:
                 voltVar:
+                    type: number
                 frequencyWatt:
+                    type: number
                 voltWatt:
+                    type: number
                 lHVRT:
+                    type: number
                 lHFRT:
+                    type: number
                 normalRampRate:
+                    type: number
                 softStartRampRate:
+                    type: number
                 connectDisconnect:
+                    type: number
                 powerCurve:
-                +curveList:
+                    type: number
+                curveList:
+                    type: number
         errorTypes:
         measurements:
         manufactureDate:

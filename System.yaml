@@ -35,9 +35,11 @@ System:
                 - emergency
         Array:
             type: array
-            properties:
-                allOf:
-                    - $ref: "Array.yaml#/Array"
+            items:
+                type: object
+                properties:
+                    allOf:
+                        - $ref: "Array.yaml#/Array"
         Meter: # TODO
             $ref: "Device.yaml#/Meter"
         Logger: # TODO

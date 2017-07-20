@@ -7,8 +7,10 @@ SiteGroup:
             description: A human-presentable name for the sites in SiteList
         SiteList:
             type: array
-            properties:
-                $ref: "#/Site"
+            items:
+                type: object
+                properties:
+                    $ref: "#/Site"
 
 Site:
     type: object

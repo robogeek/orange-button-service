@@ -37,7 +37,7 @@ paths:
                     description: OK
                     schema:
                         $ref: "System.yaml#/System"
-    /system/{systemID}:
+    /systems/{systemID}:
         get:
             description: Read an existing System
             parameters:
@@ -78,7 +78,7 @@ paths:
                 200:
                     description: OK
 
-    /system/{systemID}/arrays:
+    /systems/{systemID}/arrays:
         get:
             description: Retrieve all arrays the user has access to in the named system
             operationId: findArrays
@@ -112,7 +112,7 @@ paths:
                     schema:
                         $ref: "Array.yaml#/Array"
 
-    /system/{systemID}/array/{arrayID}:
+    /systems/{systemID}/arrays/{arrayID}:
         get:
             description: Read an existing Array
             parameters:
@@ -162,7 +162,7 @@ paths:
                 200:
                     description: OK
 
-    /system/{systemID}/devices:
+    /systems/{systemID}/devices:
         get:
             description: Retrieve all devices the user has access to in the named system
             operationId: findDevices
@@ -197,7 +197,7 @@ paths:
                     schema:
                         $ref: "Device.yaml#/Device"
 
-    /system/{systemID}/device/{deviceID}:
+    /systems/{systemID}/devices/{deviceID}:
         get:
             description: Read an existing Device
             parameters:

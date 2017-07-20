@@ -15,9 +15,11 @@ Array:
             type: number
         subArray: # (list)
             type: array
-            properties:
-                allOf:
-                    - $ref: "#/SubArray"
+            items:
+                type: object
+                properties:
+                    allOf:
+                        - $ref: "#/SubArray"
         measurement:
 
 SubArray:
