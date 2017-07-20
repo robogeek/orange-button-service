@@ -8,7 +8,7 @@ info:
         email: "david@davidherron.com"
 schemes:
     - "http"
-basePath: /v0.1
+# basePath: https://raw.githubusercontent.com/robogeek/orange-button-service/master/
 
 paths:
     /systems:
