@@ -22,21 +22,22 @@ paths:
                     schema:
                         type: array
                         items:
-                            $ref: "System.yaml#/System"
+                            $ref: "#/definitions/System"
         post:
             description: Create a new System
             operationId: NewSystem
             parameters:
                 - in: body
+                  name: system
                   description: The system to create
                   required: true
                   schema:
-                      $ref: "System.yaml#/System"
+                      $ref: "#/definitions/System"
             responses:
                 200:
                     description: OK
                     schema:
-                        $ref: "System.yaml#/System"
+                        $ref: "#/definitions/System"
     /systems/{systemID}:
         get:
             description: Read an existing System
@@ -44,11 +45,12 @@ paths:
                 - in: path
                   name: systemID
                   type: string
+                  required: true
             responses:
                 200:
                     description: OK
                     schema:
-                        $ref: "System.yaml#/System"
+                        $ref: "#/definitions/System"
 
         post:
             description: Update an existing System
@@ -57,16 +59,18 @@ paths:
                 - in: path
                   name: systemID
                   type: string
+                  required: true
                 - in: body
+                  name: system
                   description: The system to update
                   required: true
                   schema:
-                      $ref: "System.yaml#/System"
+                      $ref: "#/definitions/System"
             responses:
                 200:
                     description: OK
                     schema:
-                        $ref: "System.yaml#/System"
+                        $ref: "#/definitions/System"
         delete:
             description: Delete an existing system
             operationId: deleteSystem
@@ -74,6 +78,7 @@ paths:
                 - in: path
                   name: systemID
                   type: string
+                  required: true
             responses:
                 200:
                     description: OK
@@ -86,6 +91,7 @@ paths:
                 - in: path
                   name: systemID
                   type: string
+                  required: true
             # TODO parameters:  Parameters to filter the list of System's returned
             responses:
                 200:
@@ -93,7 +99,7 @@ paths:
                     schema:
                         type: array
                         items:
-                            $ref: "Array.yaml#/Array"
+                            $ref: "#/definitions/Array"
         post:
             description: Create a new Array
             operationId: NewArray
@@ -101,16 +107,18 @@ paths:
                 - in: path
                   name: systemID
                   type: string
+                  required: true
                 - in: body
+                  name: array
                   description: The array to create
                   required: true
                   schema:
-                      $ref: "Array.yaml#/Array"
+                      $ref: "#/definitions/Array"
             responses:
                 200:
                     description: OK
                     schema:
-                        $ref: "Array.yaml#/Array"
+                        $ref: "#/definitions/Array"
 
     /systems/{systemID}/arrays/{arrayID}:
         get:
@@ -119,14 +127,16 @@ paths:
                 - in: path
                   name: systemID
                   type: string
+                  required: true
                 - in: path
                   name: arrayID
                   type: string
+                  required: true
             responses:
                 200:
                     description: OK
                     schema:
-                        $ref: "Array.yaml#/Array"
+                        $ref: "#/definitions/Array"
 
         post:
             description: Update an existing Array
@@ -135,19 +145,22 @@ paths:
                 - in: path
                   name: systemID
                   type: string
+                  required: true
                 - in: path
                   name: arrayID
                   type: string
+                  required: true
                 - in: body
+                  name: array
                   description: The array to update
                   required: true
                   schema:
-                      $ref: "Array.yaml#/Array"
+                      $ref: "#/definitions/Array"
             responses:
                 200:
                     description: OK
                     schema:
-                        $ref: "Array.yaml#/Array"
+                        $ref: "#/definitions/Array"
         delete:
             description: Delete an existing array
             operationId: deleteArray
@@ -155,9 +168,11 @@ paths:
                 - in: path
                   name: systemID
                   type: string
+                  required: true
                 - in: path
                   name: arrayID
                   type: string
+                  required: true
             responses:
                 200:
                     description: OK
@@ -170,6 +185,7 @@ paths:
                 - in: path
                   name: systemID
                   type: string
+                  required: true
             # TODO parameters:  Parameters to filter the list of System's returned
             responses:
                 200:
@@ -177,7 +193,7 @@ paths:
                     schema:
                         type: array
                         items:
-                            $ref: "Device.yaml#/Device"
+                            $ref: "#/definitions/Device"
         post:
             # TODO May require multiple of these to support different Device's
             description: Create a new Device
@@ -186,16 +202,18 @@ paths:
                 - in: path
                   name: systemID
                   type: string
+                  required: true
                 - in: body
+                  name: device
                   description: The device to create
                   required: true
                   schema:
-                        $ref: "Device.yaml#/Device"
+                        $ref: "#/definitions/Device"
             responses:
                 200:
                     description: OK
                     schema:
-                        $ref: "Device.yaml#/Device"
+                        $ref: "#/definitions/Device"
 
     /systems/{systemID}/devices/{deviceID}:
         get:
@@ -204,14 +222,16 @@ paths:
                 - in: path
                   name: systemID
                   type: string
+                  required: true
                 - in: path
                   name: deviceID
                   type: string
+                  required: true
             responses:
                 200:
                     description: OK
                     schema:
-                        $ref: "Device.yaml#/Device"
+                        $ref: "#/definitions/Device"
 
         post:
             description: Update an existing Device
@@ -226,15 +246,16 @@ paths:
                   required: true
                   type: string
                 - in: body
+                  name: device
                   description: The device to update
                   required: true
                   schema:
-                      $ref: "Device.yaml#/Device"
+                      $ref: "#/definitions/Device"
             responses:
                 200:
                     description: OK
                     schema:
-                        $ref: "Device.yaml#/Device"
+                        $ref: "#/definitions/Device"
 
         delete:
             description: Delete an existing device
@@ -252,163 +273,772 @@ paths:
                 200:
                     description: OK
 
-    # /site/create:
-    #    post:
-    #        description: Create a new Site
-    #        operationId: NewSite
-    #        requestBody:
-    #            description: The site to create
-    #            required: true
-    #            content:
-    #                application/json:
-    #                    schema:
-    #                        $ref: "Site.yml#/Site"
-    #        responses:
-    #            200:
-    #                description: OK
-    #                content:
-    #                    application/json:
-    #                        schema:
-    #                            $ref: "Site.yml#/Site"
-    # /site/update:
-    #    post:
-    #        post:
-    #            description: Update an existing Site
-    #            operationId: NewSite
-    #            requestBody:
-    #                description: The site to create
-    #                required: true
-    #                content:
-    #                    application/json:
-    #                        schema:
-    #                            $ref: "Site.yml#/Site"
-    #            responses:
-    #                200:
-    #                    description: OK
-    #                    content:
-    #                        application/json:
-    #                            schema:
-    #                                $ref: "Site.yml#/Site"
-    # /site/destroy/{siteID}:
-    #    post:
-    #        parameters:
-    #            - in: path
-    #              name: siteID
-    #              type: string
-    #        responses:
-    #            200:
-    #                description: OK
-    # /site/fetch/{siteID}:
-    #    get:
-    #        parameters:
-    #            - in: path
-    #              name: siteID
-    #              type: string
-    #        responses:
-    #            200:
-    #                description: OK
-    #                schema:
-    #                    $ref: "Site.yml#/Site"
-    # TBD /site/search to fetch multiple Site objects at once
 
-#    /powerMeasurements:
-#        get:
-#            description: Return powerMeasurements for a pvSystem.  Probably needs to support query over a date range.
-#            parameters:
-#                - in: query
-#                  name: timestamp
-#                  type: string
-#                  description: |
-#                    Is this parameter needed?  The idea is controlling the timeframe of the data to be returned.  This may need to be a date-range (start - end).  We'll mark this as an optional parameter for now
-#                  required: false
-#            responses:
-#                200:
-#                    description: OK
-#                    schema:
-#                        $ref: "Measurements.yaml#/powerMeasurements"
+definitions:
 
-#    /powerLifetimeMeasurements:
-#        get:
-#            description: Return powerLifetimeMeasurements for a pvSystem.  Probably needs to support query over a date range.
-#            parameters:
-#                - in: query
-#                  name: timestamp
-#                  type: string
-#                  description: |
-#                    Is this parameter needed?  The idea is controlling the timeframe of the data to be returned.  This may need to be a date-range (start - end).  We'll mark this as an optional parameter for now
-#                  required: false
-#            responses:
-#                200:
-#                    description: OK
-#                    schema:
-#                        # Note this references the same object when there should probably be another object
-#                        $ref: "Measurements.yaml#/powerMeasurements"
+    Array:
+        type: object
+        properties:
+            module:
+                $ref: "#/definitions/Module"
+            inverter:
+                $ref: "#/definitions/Inverter"
+            installType:
+                type: string
+                enum:
+                    - rooftop
+                    - ground
+            totalModuleArea:
+                type: number
+            numberSubArrays: # (default1)
+                type: number
+            subArray: # (list)
+                type: array
+                items:
+                    $ref: "#/definitions/SubArray"
+            measurement:
+                type: number
+                description: TODO THIS IS UNFINISHED
 
-#    /energyMeasurements:
-#        get:
-#            description: Return energyMeasurements for a pvSystem.  Probably needs to support query over a date range.
-#            parameters:
-#                - in: query
-#                  name: timestamp
-#                  type: string
-#                  description: |
-#                    Is this parameter needed?  The idea is controlling the timeframe of the data to be returned.  This may need to be a date-range (start - end).  We'll mark this as an optional parameter for now
-#                  required: false
-#            responses:
-#                200:
-#                    description: OK
-#                    schema:
-#                        $ref: "Measurements.yaml#/energyMeasurements"
+    SubArray:
+        type: object
+        properties:
+            trackerType:
+                type: string
+                enum:
+                    - fixed
+                    - 1Axis
+                    - 2Axis
+                    - azimuthAxis
+                    - seasonalTilt
+            orientation:
+                type: string
+                enum:
+                    - tilt_eq_latitude # (Boolean)
+                    - tilt # (deg)
+                    - azimuth # (deg)
+                    - groundCoverageRatio
+                    - trackerRotationLimit # (deg)
+            dcRating:
+                type: number
+            modulesPerString:
+                type: integer
+            numberStrings:
+                type: number
+            geospatialLayout:
+                type: number
+                description: TODO THIS IS UNFINISHED
 
-#    /energyLifetimeMeasurements:
-#        get:
-#            description: Return energyLifetimeMeasurements for a pvSystem.  Probably needs to support query over a date range.
-#            parameters:
-#                - in: query
-#                  name: timestamp
-#                  type: string
-#                  description: |
-#                    Is this parameter needed?  The idea is controlling the timeframe of the data to be returned.  This may need to be a date-range (start - end).  We'll mark this as an optional parameter for now
-#                  required: false
-#            responses:
-#                200:
-#                    description: OK
-#                    schema:
-#                        $ref: "Measurements.yaml#/energyLifetimeMeasurements"
 
-#    /devices:
-#        get:
-#            description: Return a list of the devices in the system.
-#            responses:
-#                200:
-#                    description: OK
-#                    schema:
-#                        type: array
-#                        items:
-#                            $ref: "device.yaml#/Device"
+    Device:
+        description: |
+            Any electrical system device in a PV Array, such as inverters or PV modules.  This is a subset of the Equipment used to build the facilities on the Site.  Other Equipment like racking will not be considered for this object.
+        type: object
+        properties:
+            deviceType:
+                $ref: "#/definitions/DERDeviceType"
+            extendedInfo:
+                type: number
+                description: TODO THIS IS UNFINISHED
+            type:
+                type: number
+                description: TODO THIS IS UNFINISHED
+            subType:
+                type: number
+                description: TODO THIS IS UNFINISHED
+            manufacturer:
+                type: string
+                description: Manufacturer name
+            model:
+                type: string
+                description: Manufacturer-assigned model number
+            nameplate:
+                type: object
+                properties:
+                    nominalActivePowerRating:
+                        type: number
+                    nominalApparentPowerRating:
+                        type: number
+                    nominalPowerTemp:
+                        type: number
+                    nominalPowerRating:
+                        type: number
+                    maximumDCvoltage:
+                        type: number
+                    maximumDCamps:
+                        type: number
+                    inverterShortCircuit:
+                        type: number
+                    inverterTerminalTemp:
+                        type: number
+                    minimumMPPTvoltage:
+                        type: number
+                    maximumMPPRvoltage:
+                        type: number
+                    batteryMaximumPower:
+                        type: number
+            status:
+                type: string
+                enum:
+                    - off
+                    - sleeping # (auto-shutdown) or low output power/voltage
+                    - starting # up or ON but not producing power
+                    - tracking # MPPT power point
+                    - forced # power reduction/derating
+                    - shutting-down
+                    - faults # one or more faults exist
+                    - standby # (service on unit) - DER may be at high output voltage/power
+                    - test-mode
+                    - manufacturer-defined-status
+            state:
+                type: object
+                properties:
+                    voltVar:
+                        type: number
+                    frequencyWatt:
+                        type: number
+                    voltWatt:
+                        type: number
+                    lHVRT:
+                        type: number
+                    lHFRT:
+                        type: number
+                    normalRampRate:
+                        type: number
+                    softStartRampRate:
+                        type: number
+                    connectDisconnect:
+                        type: number
+                    powerCurve:
+                        type: number
+                    curveList:
+                        type: number
+            errorTypes:
+                type: number
+                description: TODO THIS IS UNFINISHED
+            measurements:
+                type: number
+                description: TODO THIS IS UNFINISHED
+            manufactureDate:
+                type: string
+                description: When the device was manufactured - ISO date string
+            purchaseDate:
+                type: string
+                description: When the device was purchased - ISO date string
+            serialNumber:
+                type: string
+                description: Manufacturer-assigned serial number
+            warrantyPromise:
+                type: string
+                description: Coverage terms for the warranty TBD exact format
 
-#    /inverters:
-#        get:
-#            description: Return a list of the inverters in the system.
-#            responses:
-#                200:
-#                    description: OK
-#                    schema:
-#                        type: array
-#                        items:
-#                            $ref: "inverterInstance.yaml"
+            # location:
+            #    type: string
+            #    description: Where is this device installed TBD exact format, lat/long?
+            # FROM DeviceNameplate
+            # deviceRatingPerformance:
+            #    type: string
+            #    description: TBD do not know what this is
+            # certifications:
+            #    type: array
+            #    description: List of certifications for the device
+            #    items:
+            #        $ref: "#/definitions/DERCertificationType"
+            # warrantyTerm:
+            #    type: string
+            #    description: The length of the warranty TBD exact format, number of months?
+            # warrantyCoverage:
+            #    type: string
+            #    description: Coverage terms for the warranty TBD exact format
+            # FROM DeviceInstance
+            # numberUnits:
+            #    type: integer
+            #    description: The count of the devices installed at the site
+            # warrantyProvider:
+            #    type: string
+            #    description: Name for the organization providing warranty support
+            # lastServiceDate:
+            #    type: string
+            #    description: When the device was last serviced - ISO date string - required for financials?
+            # cost:
+            #    type: string
+            #    description: How much did the device cost
 
-#    /inverterMeasurements:
-#        get:
-#            description: Return inverterMeasurements for a pvSystem.  Probably needs to support query over a date range.
-#            parameters:
-#                - in: query
-#                  name: timestamp
-#                  type: string
-#                  description: |
-#                    Is this parameter needed?  The idea is controlling the timeframe of the data to be returned.  This may need to be a date-range (start - end).  We'll mark this as an optional parameter for now
-#                  required: false
-#            responses:
-##                    description: OK
-#                    schema:
-#                        $ref: "Measurements.yaml#/inverterMeasurements"
+    DERDeviceType:
+        type: string
+        enum:
+            - inverter   # a.k.a. PCS
+            - module
+            - metStation
+            - combiner
+            - meter
+            - logger
+            - transformer
+
+    DERCertificationType:
+        type: string
+        enum:
+            - UL
+            - CEC
+            - TUV
+            - JET
+            - MCS
+            - FSEC
+            - SunSpec
+            - IEEE 2030.5
+            - OpenADR
+            - HECO
+
+    Inverter:
+        allOf:
+            - $ref: "#/definitions/Device"
+            - type: object
+              properties:
+                  deviceType:
+                      type: string
+                      enum: [ inverter ]
+                  MeasurementTypes:
+                      type: number
+                      description: TODO THIS IS UNFINISHED
+                  ErrorTypes:
+                      type: number
+                      description: TODO THIS IS UNFINISHED
+                  FunctionsImplemented:
+                      $ref: "#/definitions/FunctionsImplemented"
+
+
+    FunctionsImplemented:
+        type: object
+        properties:
+            voltVArMode:
+                type: number
+                description: TODO THIS IS UNFINISHED
+            frequencyWattMode:
+                type: number
+                description: TODO THIS IS UNFINISHED
+            wattPowerFactorMode:
+                type: number
+                description: TODO THIS IS UNFINISHED
+            voltWattMode:
+                type: number
+                description: TODO THIS IS UNFINISHED
+            lowVoltageRideThroughMode:
+                type: number
+                description: TODO THIS IS UNFINISHED
+            highVoltageRideThroughMode:
+                type: number
+                description: TODO THIS IS UNFINISHED
+            setGenConnect:
+                type: number
+                description: TODO THIS IS UNFINISHED
+            setStorConnect:
+                type: number
+                description: TODO THIS IS UNFINISHED
+            fixedW:
+                type: number
+                description: TODO THIS IS UNFINISHED
+            fixedVAr:
+                type: number
+                description: TODO THIS IS UNFINISHED
+            fixedPowerFactor:
+                type: number
+                description: TODO THIS IS UNFINISHED
+            chargeMode:
+                type: number
+                description: TODO THIS IS UNFINISHED
+            dischargeMode:
+                type: number
+                description: TODO THIS IS UNFINISHED
+
+    Module:
+        allOf:
+            - $ref: "#/definitions/Device"
+            - type: object
+              properties:
+                modulesPerString:
+                    type: number
+                    description: TODO THIS IS UNFINISHED
+                stringsInParallel:
+                    type: number
+                    description: TODO THIS IS UNFINISHED
+                dcOptimizer: # (Boolean)
+                    type: number
+                    description: TODO THIS IS UNFINISHED
+                microinverter: # (Boolean)
+                    type: number
+                    description: TODO THIS IS UNFINISHED
+                MeasurementTypes:
+                    type: number
+                    description: TODO THIS IS UNFINISHED
+                ErrorTypes: # (specific)
+                    type: number
+                    description: TODO THIS IS UNFINISHED
+                Nameplate:
+                    type: object
+                    properties:
+                        stringVoc:
+                            type: number
+                            description: TODO THIS IS UNFINISHED
+                        stringVmp:
+                            type: number
+                            description: TODO THIS IS UNFINISHED
+
+    Combiner:
+        allOf:
+            - $ref: "#/definitions/Device"
+            - type: object
+              properties:
+                  MeasurementTypes:
+                      type: number
+                      description: TODO THIS IS UNFINISHED
+                  ErrorTypes:
+                      type: number
+                      description: TODO THIS IS UNFINISHED
+
+    Meter:
+        allOf:
+            - $ref: "#/definitions/Device"
+            - type: object
+              properties:
+                  accuracy:
+                      type: number
+                      description: TODO THIS IS UNFINISHED
+                  MeasurementTypes:
+                      type: number
+                      description: TODO THIS IS UNFINISHED
+                  ErrorTypes:
+                      type: number
+                      description: TODO THIS IS UNFINISHED
+
+    Logger:
+        allOf:
+            - $ref: "#/definitions/Device"
+            - type: object
+              properties:
+                  MeasurementTypes:
+                      type: number
+                      description: TODO THIS IS UNFINISHED
+                  ErrorTypes:
+                      type: number
+                      description: TODO THIS IS UNFINISHED
+
+    Transformer:
+        allOf:
+            - $ref: "#/definitions/Device"
+            - type: object
+              properties:
+                  MeasurementTypes:
+                      type: number
+                      description: TODO THIS IS UNFINISHED
+                  ErrorTypes:
+                      type: number
+                      description: TODO THIS IS UNFINISHED
+
+    MetStation:
+        allOf:
+            - $ref: "#/definitions/Device"
+            - type: object
+              properties:
+                  MeasurementTypes:
+                      type: number
+                      description: TODO THIS IS UNFINISHED
+                  ErrorTypes:
+                      type: number
+                      description: TODO THIS IS UNFINISHED
+
+
+    Event:
+        type: object
+        properties:
+            dateTime:
+                type: number
+                description: TODO THIS IS UNFINISHED
+            type:
+                type: number
+                description: TODO THIS IS UNFINISHED
+            subtype:
+                type: number
+                description: TODO THIS IS UNFINISHED
+            value:
+                type: number
+                description: TODO THIS IS UNFINISHED
+
+#     EventType:  # ???
+
+    Organization:
+        type: object
+        properties:
+            phone:
+                type: string
+            postalAddress:
+                $ref: "#/definitions/PostalAddress"
+            contactPoint:
+                $ref: "#/definitions/Person"
+
+    Person:
+        type: object
+        properties:
+            email:
+                type: string
+            phone:
+                type: string
+            postalAddress:
+                $ref: "#/definitions/PostalAddress"
+
+    PostalAddress:
+        description: A Mailing address
+        type: object
+        properties:
+            addressLine1:
+                type: string
+                description: First line of the address
+            addressLine2:
+                type: string
+                description: Second line of the address
+            city:
+                type: string
+                description: City
+            stateProvince:
+                type: string
+                description: State or Province
+            country:
+                type: string
+                description: Country
+            postalCode:
+                type: string
+                description: Postal code
+
+
+
+    Measurement:
+        description: |
+            Defined in ASHRAE 201 FSGIM section 6.3.  This is a base type for other Measurement objects.
+        type: object
+        properties:
+            timeReference:
+                type: string
+                description:  |
+                    The time interval for this measurement.  Either one or two timestamps.  TBD a textual format to store two timestamps.  See ASHRAE 201 FSGIM sections 5.5 and 6.3
+
+    powerMeasurements:
+        description: |
+            Defined in ASHRAE 201 FSGIM section 6.3. This derives from Measurement.  It is supposed to be a MeasurementSet, meaning an array of Measurement's.
+        type: array
+        items:
+            allOf:
+                - $ref: "#/definitions/Measurement"
+                - type: object
+                  properties:
+                    source:
+                        type: string
+                        description: "QUERY: What the heck is this?"
+                    quality:
+                        type: number
+                        description: "QUERY: What the heck is this?"
+                    KWpeak:
+                        type: number
+                        description: "Peak production in kiloWatts  QUERY: Over what time period?"
+                    powerReal:
+                        type: number
+                        description: "Real power in kiloWatts.  FSGIM section 6.3"
+                    powerReactive:
+                        type: number
+                        description: "Reactive power in kiloWatts.  FSGIM section 6.3"
+                    powerApparent:
+                        type: number
+                        description: "Apparent power in kiloWatts.  FSGIM section 6.3"
+                    powerFactor:
+                        type: number
+                        description: "Power Factor in .... units?  Percentage?"
+
+    energyMeasurements:
+        description: |
+            Defined in ASHRAE 201 FSGIM section 6.3. This derives from Measurement.  It is supposed to be a MeasurementSet, meaning an array of Measurement's.
+        type: array
+        items:
+            allOf:
+                - $ref: "#/definitions/Measurement"
+                - type: object
+                  properties:
+                    source:
+                        type: string
+                        description: "QUERY: What the heck is this?"
+                    quality:
+                        type: number
+                        description: "QUERY: What the heck is this?"
+                    periodStart:
+                        type: string
+                        description: "QUERY: What the heck is this?"
+                    periodEnd:
+                        type: string
+                        description: "QUERY: What the heck is this?  Obviously the two define a time range"
+                    interval:
+                        type: string
+                        description: "QUERY: What the heck is this?  Another time range?  Or a repetition factor?"
+                    energyReal:
+                        type: number
+                        description:  "QUERY: What the heck is this?"
+                    energyReactive:
+                        type: number
+                        description:  "QUERY: What the heck is this?"
+                    energyApparent:
+                        type: number
+                        description:  "QUERY: What the heck is this?"
+
+
+    energyLifetimeMeasurements:
+        description: |
+            Defined in ASHRAE 201 FSGIM section 6.3. This derives from Measurement.  It is supposed to be a MeasurementSet, meaning an array of Measurement's.
+        type: array
+        items:
+            allOf:
+                - $ref: "#/definitions/Measurement"
+                - type: object
+                  properties:
+                    source:
+                        type: string
+                        description: "QUERY: What the heck is this?"
+                    quality:
+                        type: number
+                        description: "QUERY: What the heck is this?"
+                    exportedEnergyAC:
+                        type: number
+                        description:  "QUERY: What the heck is this?"
+                    exportedGridAC:
+                        type: number
+                        description:  "QUERY: What the heck is this?"
+                    importedGridAC:
+                        type: number
+                        description:  "QUERY: What the heck is this?"
+                    chargedStorageAC:
+                        type: number
+                        description:  "QUERY: What the heck is this?"
+                    chargedStorageACgrid:
+                        type: number
+                        description:  "QUERY: What the heck is this?"
+                    chargedStorageACpv:
+                        type: number
+                        description:  "QUERY: What the heck is this?"
+                    dischargedStorageAC:
+                        type: number
+                        description:  "QUERY: What the heck is this?"
+                    parasiticLossesAC:
+                        type: number
+                        description:  "QUERY: What the heck is this?"
+
+
+    inverterMeasurements:
+        type: array
+        items:
+            allOf:
+                - $ref: "#/definitions/Measurement"
+                - type: object
+                  properties:
+                      amps: # (block)
+                        type: number
+                      voltage: # (block)
+                        type: number
+                      watts:
+                        type: number
+                      hz:
+                        type: number
+                      VA:
+                        type: number
+                      VAr:
+                        type: number
+                      wattHours:
+                        type: number
+                      DCamps:
+                        type: number
+                      DCvoltage:
+                        type: number
+                      temperature: # (block)
+                        type: number
+                      status:
+                        type: number
+                        description: TODO UNDEFINED
+                      event: # (array)
+                        type: number
+                        description: TODO UNDEFINED
+
+
+
+    SiteGroup:
+        type: object
+        properties:
+            GroupName:
+                type: string
+                description: A human-presentable name for the sites in SiteList
+            SiteList:
+                type: array
+                items:
+                    $ref: "#/definitions/Site"
+
+    Site:
+        type: object
+        properties:
+            SiteID:
+                type: string
+                description: GUID for the Site
+            SiteDescription:
+                type: string
+                description: Description of the Site
+            parcelID:
+                type: string
+                description: Presumably a GUID for the parcel
+            # SiteType:
+            #    $ref: "#/definitions/SiteType"
+            address:
+                $ref: "#/definitions/PostalAddress"
+            location:
+                $ref: "#/definitions/location"
+            siteAverageElevation:
+                type: number
+            geospatialBoundary:
+                type: number
+                description: TODO UNDEFINED
+            utilityMeterID:
+                type: string
+                description: Presumably a GUID for the meter
+            timezone:
+                type: string
+                description: TZ indicator
+            climateZone:
+                type: string
+            property:
+                $ref: "#/definitions/property"
+            owner:
+                type: string
+                description: Name of the entity owning the site
+
+    # TODO This is not referenced by anything else
+    SiteGeospatialData:
+        type: object
+        properties:
+            SiteLatitude:
+                type: number
+            SiteLongitude:
+                type: number
+            SiteElevation:
+                type: number
+            SiteAverageElevation:
+                type: number
+            SiteGeospatialBoundary: # Unknown definition
+                type: number
+                description: TODO UNDEFINED
+
+    # SiteType:
+    #    type: string
+    #    enum:
+    #        - residential
+    #        - commercial
+    #        - industrial
+    #        - agricultural
+    #        - plant
+
+    location:
+        type: object
+        properties:
+            latitude:
+                type: number
+            longitude:
+                type: number
+            elevation:
+                type: number
+
+    property:
+        type: object
+        properties:
+            zoning:
+                type: string
+                description: Description of zoning codes by county planning or equivalent
+            mapURL:
+                type: string
+                description: URL to a maps service showing where the property exists
+            survey:
+                type: string
+                description: URL (URI?) to a site survey
+            maps:
+                type: string
+                description: URL (URI?) to official maps e.g. county planning commission
+            geotechnical:
+                type: string
+                description: URL (URI?) to geotechnical data
+            appraisal:
+                type: string
+                description: URL (URI?) to appraisal documents
+            photos:
+                type: string
+                description: URL (URI?) to a photo gallery
+
+
+
+    System:
+        type: object
+        properties:
+            systemID:
+                type: string
+            Type:
+                type: string
+                enum:
+                    - residential
+                    - communitySolar
+                    - commercial
+                    - industrial
+                    - agricultural
+                    - utility
+            DERType:
+                type: string
+                enum:
+                    - pvSystem
+                    - storage
+                    - pvStorage
+            Nameplate:
+                $ref: "#/definitions/SystemNameplate"
+            activationDate:
+                type: string
+            Availability:
+                type: string
+                enum:
+                    - islanded
+                    - standby
+                    - environment
+                    - grid
+                    - shutdown
+                    - forced
+                    - emergency
+            Array:
+                type: array
+                items:
+                    - $ref: "#/definitions/Array"
+            Meter: # TODO
+                $ref: "#/definitions/Meter"
+            Logger: # TODO
+                $ref: "#/definitions/Logger"
+            MetStation: # TODO
+                $ref: "#/definitions/MetStation"
+            Transformer: # TODO
+                $ref: "#/definitions/Transformer"
+            Drawings: # (URI)
+                type: object
+                properties:
+                    designDrawings:
+                        type: string
+                    asBuiltDrawings:
+                        type: string
+
+    SystemNameplate:
+        type: object
+        properties:
+            InstalledDCCapacity:
+                type: number
+            InstalledACCapacity:
+                type: number
+            InstalledPanelArea:
+                type: number
+            NominalPowerRating:
+                type: number
+            InstalledEnergyStoragekW:
+                type: number
+            InstalledEnergyStoragekWh:
+                type: number
